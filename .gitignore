@@ -1,0 +1,18 @@
+# Visual Studio / .NET build outputs
+.vs/
+bin/
+obj/
+publish/
+publish-*/
+*.user
+*.suo
+
+# Local app state, logs, and legacy core which is not required by this project
+settings.json
+*.log
+JBS.exe
+JBS.ini
+
+# Python generator cache
+__pycache__/
+*.py[cod]

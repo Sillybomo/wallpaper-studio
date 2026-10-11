@@ -1,0 +1,11 @@
+<!-- @author bomo；用途：声明壁纸工坊应用入口。 -->
+<Application x:Class="JBSWallpaperStudio.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <FontFamily x:Key="AppFont">Segoe UI</FontFamily>
+        <BitmapImage x:Key="AppIconImage"
+                     UriSource="pack://application:,,,/Assets/AppIcon.png" />
+    </Application.Resources>
+</Application>
