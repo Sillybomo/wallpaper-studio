@@ -1,5 +1,5 @@
 <!-- @author bomo；用途：提供图片选择、预览和桌面显示方式选项。 -->
-<Window x:Class="JBSWallpaperStudio.MainWindow"
+<Window x:Class="WallpaperStudio.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"

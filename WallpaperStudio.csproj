@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <!-- @author bomo；用途：构建新版壁纸工坊 Windows 桌面应用。 -->
+  <!-- @author bomo；用途：构建 WallpaperStudio Windows 桌面应用。 -->
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
@@ -7,9 +7,10 @@
     <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>JBSWallpaperStudio</AssemblyName>
-    <RootNamespace>JBSWallpaperStudio</RootNamespace>
-    <Version>2.0.1</Version>
+    <AssemblyName>WallpaperStudio</AssemblyName>
+    <RootNamespace>WallpaperStudio</RootNamespace>
+    <Product>壁纸工坊</Product>
+    <Version>2.1.0</Version>
     <Authors>bomo</Authors>
     <Description>壁纸选择与预览工具</Description>
     <Platforms>x64</Platforms>

@@ -9,10 +9,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 
-namespace JBSWallpaperStudio;
+namespace WallpaperStudio;
 
 /// <summary>
-/// 提供壁纸选择、屏幕预览和原有设置核心的现代化界面。
+/// 提供壁纸选择、屏幕预览和原图设置功能的桌面界面。
 /// @author bomo
 /// </summary>
 public partial class MainWindow : Window
@@ -296,13 +296,24 @@ public partial class MainWindow : Window
     {
         try
         {
-            if (!File.Exists(SettingsPath))
+            var settingsSourcePath = File.Exists(SettingsPath) ? SettingsPath : LegacySettingsPath;
+            if (!File.Exists(settingsSourcePath))
             {
                 return new StudioSettings(null, FillPosition);
             }
 
-            return JsonSerializer.Deserialize<StudioSettings>(File.ReadAllText(SettingsPath))
-                ?? new StudioSettings(null, FillPosition);
+            var settings = JsonSerializer.Deserialize<StudioSettings>(File.ReadAllText(settingsSourcePath));
+            if (settings is null)
+            {
+                return new StudioSettings(null, FillPosition);
+            }
+
+            if (string.Equals(settingsSourcePath, LegacySettingsPath, StringComparison.OrdinalIgnoreCase))
+            {
+                MigrateLegacySettings();
+            }
+
+            return settings;
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException)
         {
@@ -352,8 +363,37 @@ public partial class MainWindow : Window
     /// <returns>当前用户本机设置文件的完整路径。</returns>
     private static string SettingsPath => Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        "WallpaperStudio",
+        "settings.json");
+
+    /// <summary>
+    /// 返回旧版壁纸工坊配置文件路径，以便升级后保留用户选择。
+    /// @author bomo
+    /// </summary>
+    /// <returns>旧应用配置文件的完整路径。</returns>
+    private static string LegacySettingsPath => Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
         "JBSWallpaperStudio",
         "settings.json");
+
+    /// <summary>
+    /// 将旧应用的偏好文件复制到新应用目录，保留原文件作为回退副本。
+    /// @author bomo
+    /// </summary>
+    /// <exception cref="IOException">配置文件无法复制。</exception>
+    /// <exception cref="UnauthorizedAccessException">当前用户无权迁移配置。</exception>
+    private void MigrateLegacySettings()
+    {
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(SettingsPath)!);
+            File.Copy(LegacySettingsPath, SettingsPath, overwrite: false);
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            ShowStatus($"已读取旧版选择，但无法迁移本机设置：{ex.Message}", false);
+        }
+    }
 
     /// <summary>
     /// 通过 Windows 壁纸接口应用图片，并按系统设置刷新 Explorer 桌面。
@@ -373,6 +413,6 @@ public partial class MainWindow : Window
     /// @author bomo
     /// </summary>
     /// <param name="ImagePath">上次选中的图片完整路径。</param>
-    /// <param name="PositionCode">JBS 核心使用的铺放方式编号。</param>
+    /// <param name="PositionCode">Windows 桌面使用的铺放方式编号。</param>
     private sealed record StudioSettings(string? ImagePath, int PositionCode);
 }

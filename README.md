@@ -1,4 +1,4 @@
-# 壁纸工坊
+# WallpaperStudio（壁纸工坊）
 
 一个使用 WPF 编写的 Windows 桌面壁纸工具，可选择本机图片、预览铺放方式，并将原图路径交给 Windows 设置为桌面背景。
 
@@ -15,7 +15,7 @@
 需要 Windows、.NET 8 SDK 和 Windows Desktop Runtime。打开 PowerShell，在项目目录运行：
 
 ```powershell
-dotnet publish .\JBSWallpaperStudio.csproj --configuration Release
+dotnet publish .\WallpaperStudio.csproj --configuration Release
 ```
 
 重新绘制图标时需要 Python 与 Pillow：
