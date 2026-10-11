@@ -30,5 +30,5 @@ python .\tools\generate_icon.py
 ## 项目说明
 
 - 作者标记：`bomo`
-- 当前仓库未附带开源许可证；公开代码不代表授予再使用或分发许可。
+- 开源许可证：MIT，版权声明为 `Copyright (c) 2026 bomo`，详见 [LICENSE](LICENSE)。
 - 壁纸图片不会作为项目文件上传。

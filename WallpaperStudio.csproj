@@ -10,7 +10,7 @@
     <AssemblyName>WallpaperStudio</AssemblyName>
     <RootNamespace>WallpaperStudio</RootNamespace>
     <Product>壁纸工坊</Product>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
     <Authors>bomo</Authors>
     <Description>壁纸选择与预览工具</Description>
     <Platforms>x64</Platforms>
